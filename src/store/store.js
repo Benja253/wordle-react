@@ -1,0 +1,52 @@
+import { create } from 'zustand'
+
+const cellActiveInitial = {row: 0, cell:0}
+
+const arrLeeterInitial = [
+  [{value: '', status: 'none'},{value: '', status: 'none'}],
+  [{value: '', status: 'none'},{value: '', status: 'none'}],
+  [{value: '', status: 'none'},{value: '', status: 'none'}],
+  [{value: '', status: 'none'},{value: '', status: 'none'}],
+  [{value: '', status: 'none'},{value: '', status: 'none'}],
+  [{value: '', status: 'none'},{value: '', status: 'none'}],
+]
+
+export const useStore = create((set) => ({
+  // Palabra seleccionada
+  wordSelected: 'fe',
+
+  // Celda activa
+  cellActive: cellActiveInitial,
+  changeRow: (newRow) => set(() => ({cellActive: {row: newRow, cell: 0}})),
+  changeCell: (newCell) => set(state => ({cellActive: {...state.cellActive, cell: newCell}})),
+
+  // Contenido del wordle
+  arrLetters: arrLeeterInitial,
+  addLetter: (letter) => set(state => {
+    state.arrLetters[state.cellActive.row][state.cellActive.cell].value = letter
+    return ({arrLetters: [...state.arrLetters]})
+  }),
+  removeLetter: () => set(state => {
+    if(state.arrLetters[state.cellActive.row][state.cellActive.cell].value !== '') {
+      state.arrLetters[state.cellActive.row][state.cellActive.cell].value = ''
+    } else {
+      if(state.cellActive.cell > 0){
+        state.arrLetters[state.cellActive.row][state.cellActive.cell - 1].value = ''
+        state.changeCell(state.cellActive.cell - 1)
+      }
+    }
+    return {arrLetters: [...state.arrLetters]}
+  }),
+  changeStatus: (newStatus, cell) => set(state => {
+    if(state.arrLetters[4][state.wordLength - 1].status !== 'none') {
+      state.arrLetters[state.cellActive.row][cell].status = newStatus
+    } else {
+      state.arrLetters[state.cellActive.row - 1][cell].status = newStatus
+    }
+    return {arrLetters: [...state.arrLetters]}
+  }),
+
+  // Cantidad de letras de la palabra
+  wordLength: 2,
+  setWordLength: (newLength) => set(state => {wordLength: newLength})
+}))
