@@ -1,6 +1,8 @@
-export const compareWord = (word, wordSelected) => {
+export const compareWord = (word, wordSelected, changeYouWon) => {
 
-  if(word === wordSelected) console.log('correcto')
+  if(word === wordSelected) {
+    changeYouWon(true)
+  }
 
   let response = []
 

@@ -3,6 +3,7 @@ import { useStore } from "../store/store"
 
 const Cell = ({styles, isRowActive, cellNumber, rowNumber, cell}) => {
 
+  
   const cellActive = useStore(state => state.cellActive)
   const changeCell = useStore(state => state.changeCell)
   
@@ -23,7 +24,7 @@ const Cell = ({styles, isRowActive, cellNumber, rowNumber, cell}) => {
       <div className={`${cell.status === 'none' ? styles.front : `${styles.back} ${styles[cell.status]}`}`}>
         {cell.value}
       </div>
-      <div className={`${cell.status === 'none' ? styles.back : `${styles.front} ${styles[cell.status]}`}`}>{cell.value}</div>
+      <div className={`${cell.status === 'none' ? styles.back : `${styles.front}`}`}>{cell.value}</div>
     </div>
   )
 }

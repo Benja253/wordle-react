@@ -1,5 +1,31 @@
+.app {
+  position: relative;
+}
 .title {
   text-align: center;
   padding: 1em 0;
-  color: var(--purple-light);
+  color: var(--font-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.notification {
+  width: 15em;
+  background-color: var(--purple-dark);
+  text-align: center;
+  padding: 0.7em 0;
+  border-radius: 0.8em;
+  font-weight: 300;
+  position: absolute;
+  top: 1.6em;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.95;
+  transition: top 200ms ease;
+}
+.hidden {
+  top: -3em;
+}
+.hiddenModal {
+  transform: scale(0);
 }

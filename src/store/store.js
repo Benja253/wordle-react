@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 const cellActiveInitial = {row: 0, cell:0}
 
-const arrLeeterInitial = [
+const arrLetterInitial = [
   [{value: '', status: 'none'},{value: '', status: 'none'}],
   [{value: '', status: 'none'},{value: '', status: 'none'}],
   [{value: '', status: 'none'},{value: '', status: 'none'}],
@@ -13,7 +13,12 @@ const arrLeeterInitial = [
 
 export const useStore = create((set) => ({
   // Palabra seleccionada
-  wordSelected: 'fe',
+  wordSelected: '',
+  changeWordSelected: (newWord) => set(() => ({wordSelected: newWord})),
+
+  // Estado que indique si ganaste o perdiste
+  youWon: null,
+  changeYouWon: (newValue) => set(() => ({youWon: newValue})),
 
   // Celda activa
   cellActive: cellActiveInitial,
@@ -21,7 +26,7 @@ export const useStore = create((set) => ({
   changeCell: (newCell) => set(state => ({cellActive: {...state.cellActive, cell: newCell}})),
 
   // Contenido del wordle
-  arrLetters: arrLeeterInitial,
+  arrLetters: arrLetterInitial,
   addLetter: (letter) => set(state => {
     state.arrLetters[state.cellActive.row][state.cellActive.cell].value = letter
     return ({arrLetters: [...state.arrLetters]})
@@ -48,5 +53,18 @@ export const useStore = create((set) => ({
 
   // Cantidad de letras de la palabra
   wordLength: 2,
-  setWordLength: (newLength) => set(state => {wordLength: newLength})
+  setWordLength: (newLength) => set(state => {wordLength: newLength}),
+
+  resetAllStore: () => set(() => ({
+    youWon: null,
+    cellActive: cellActiveInitial,
+    arrLetters: [
+      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
+      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
+      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
+      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
+      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
+      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
+    ],
+  }))
 }))
