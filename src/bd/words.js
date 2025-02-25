@@ -51,6 +51,7 @@ export const letter2 = [
   "pe",
   "pc",
   "ph",
+  "pi",
   "po",
   "re",
   "se",

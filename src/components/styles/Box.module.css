@@ -53,3 +53,8 @@
 .no {
   background-color: var(--no-color);
 }
+@media screen and (max-width: 720px) {
+  .box {
+    font-size: 0.9em;
+  }
+}

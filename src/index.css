@@ -6,9 +6,10 @@
   --purple-light: #9499ff;
   --purple-medium: #6eacda;
   --purple-dark: #2d3e53;
-  --perfect-color:rgb(43, 118, 43);
-  --imperfect-color:rgb(157, 140, 27);
+  --perfect-color:#2b762b;
+  --imperfect-color:#9d8c1b;
   --no-color: #2a2a2ae0;
+  --btn-red-color: #d43535;
 }
 
 html {

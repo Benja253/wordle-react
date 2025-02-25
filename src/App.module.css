@@ -1,6 +1,23 @@
 .app {
   position: relative;
 }
+.btn__instructions{
+  position: fixed;
+  top: 1em;
+  left: 2em;
+  font-size: 1.3em;
+  font-weight: 700;
+  text-transform: uppercase;
+  width: 3em;
+  aspect-ratio: 1;
+  padding: 0.5em 0em;
+  border-radius: 50%;
+  background-color: var(--purple-light);
+  color: var(--bg-body);
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
 .title {
   text-align: center;
   padding: 1em 0 0.5em;
@@ -28,4 +45,9 @@
 }
 .hiddenModal {
   transform: scale(0);
+}
+@media screen and (max-width: 720px) {
+  .title {
+    font-size: 1.8em;
+  }
 }

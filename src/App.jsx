@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './App.module.css'
 import useKeyDown from './hooks/useKeyDown'
 import { letter2 } from './bd/words'
 import { useStore } from './store/store'
 import { Notification, Box, Keyboard } from './components'
 import ModalResult from './components/ModalResult'
+import Instructions from './components/Instructions'
 
 function App() {
 
@@ -12,6 +13,8 @@ function App() {
   const cellActive = useStore(state => state.cellActive)
   const youWon = useStore(state => state.youWon)
   const arrLetters = useStore(state => state.arrLetters)
+
+  const [hiddenInstruction, setHiddenInstruction] = useState(true)
 
   const {
     pressArrowRight,
@@ -42,9 +45,18 @@ function App() {
     changeWordSelected(letter2[Math.floor(Math.random() * letter2.length)])
   }, [])
 
+  const handleInstructions = () => {
+    setHiddenInstruction(false)
+  }
+
   return (
     <div className={`${styles.app}`}>
-      <Notification 
+      <button onClick={handleInstructions} className={styles.btn__instructions}>?</button>
+      <Instructions
+        hiddenInstruction={hiddenInstruction}
+        setHiddenInstruction={setHiddenInstruction}
+      />
+      <Notification
         notificationHTML={notificationHTML} 
         styles={styles}
       />
