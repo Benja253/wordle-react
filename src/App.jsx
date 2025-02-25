@@ -3,13 +3,15 @@ import styles from './App.module.css'
 import useKeyDown from './hooks/useKeyDown'
 import { letter2 } from './bd/words'
 import { useStore } from './store/store'
-import { Notification, Box } from './components'
+import { Notification, Box, Keyboard } from './components'
 import ModalResult from './components/ModalResult'
 
 function App() {
 
   const changeWordSelected = useStore(state => state.changeWordSelected)
   const cellActive = useStore(state => state.cellActive)
+  const youWon = useStore(state => state.youWon)
+  const arrLetters = useStore(state => state.arrLetters)
 
   const {
     pressArrowRight,
@@ -51,6 +53,10 @@ function App() {
       />
       <h1 className={`${styles.title}`}>Wordle</h1>
       <Box />
+      <Keyboard
+        notificationHTML={notificationHTML}
+        stylesApp={styles}
+      />
     </div>
   )
 }

@@ -1,0 +1,54 @@
+.keyboard__container {
+  display: flex;
+  justify-content: center;
+  user-select: none;
+}
+.keyboard {
+  display: grid;
+  gap: 0.25em;
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(10, max-content);
+  gap: 0.25em;
+  justify-content: center;
+}
+.row:nth-last-child(1) {
+  grid-template-columns: repeat(9, max-content);
+  &.key {
+    grid-column: 10;
+  }
+  & .key:nth-child(1) {
+    background-color: rgb(182, 65, 65);
+    border-radius: 1em 0.4em 0.4em 1em;
+    width: 3em;
+  }
+  & .key:nth-last-child(1) {
+    background-color: rgb(48, 122, 48);
+    border-radius: 0.4em 1em 1em 0.4em;
+    width: 3.6em;
+  }
+}
+.key {
+  width: 2.1em;
+  height: 2.7em;
+  display: grid;
+  place-content: center;
+  background-color: rgb(63, 71, 82);
+  border-radius: 0.4em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+.no {
+  background-color: var(--no-color);
+}
+.imperfect {
+  background-color: var(--imperfect-color);
+}
+.perfect {
+  background-color: var(--perfect-color);
+}

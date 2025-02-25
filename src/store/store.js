@@ -43,10 +43,11 @@ export const useStore = create((set) => ({
     return {arrLetters: [...state.arrLetters]}
   }),
   changeStatus: (newStatus, cell) => set(state => {
+    console.log(state.cellActive.row)
     if(state.arrLetters[4][state.wordLength - 1].status !== 'none') {
       state.arrLetters[state.cellActive.row][cell].status = newStatus
     } else {
-      state.arrLetters[state.cellActive.row - 1][cell].status = newStatus
+      state.arrLetters[state.cellActive.row === 0 ? state.cellActive.row : state.cellActive.row - 1][cell].status = newStatus
     }
     return {arrLetters: [...state.arrLetters]}
   }),

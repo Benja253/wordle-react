@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { letter2 } from '../bd/words'
 import { useStore } from '../store/store'
 import styles from './styles/ModalResult.module.css'
@@ -6,10 +7,28 @@ const ModalResult = ({stylesApp}) => {
 
   const youWon = useStore(state => state.youWon)
   const wordSelected = useStore(state => state.wordSelected)
-  const resetAllStore = useStore(state => state.resetAllStore)
-  const changeWordSelected = useStore(state => state.changeWordSelected)
+  const arrLetters = useStore(state => state.arrLetters)
+  // const resetAllStore = useStore(state => state.resetAllStore)
+  // const changeWordSelected = useStore(state => state.changeWordSelected)
 
-  const attempts = [1, 4, 6, 2, 5, 2, 3]
+  const [attempts, setAttempts] = useState()
+
+  useEffect(() => {
+    let stats = JSON.parse(localStorage.getItem('stats'))
+    if(!stats) {
+      localStorage.setItem('stats', JSON.stringify([0,0,0,0,0,0,0]))
+      stats = [0,0,0,0,0,0,0]
+    }
+    if(youWon) {
+      stats[arrLetters.findLastIndex(e => e[0].value !== '')] += 1
+      localStorage.setItem('stats', JSON.stringify(stats))
+    }
+    if(youWon === false) {
+      stats[stats.length - 1] += 1
+      localStorage.setItem('stats', JSON.stringify(stats))
+    }
+    setAttempts(stats)
+  }, [youWon])
 
   const getStyte = (attempt, arrAttempts) => {
     const maxAttempt = arrAttempts.reduce((acc, cv) => cv > acc ? cv : acc , -Infinity)
@@ -19,8 +38,9 @@ const ModalResult = ({stylesApp}) => {
   }
 
   const handleClick = () => {
-    resetAllStore()
-    changeWordSelected(letter2[Math.floor(Math.random() * letter2.length)])
+    location.reload()
+    // resetAllStore()
+    // changeWordSelected(letter2[Math.floor(Math.random() * letter2.length)])
   }
 
   return (
@@ -33,7 +53,7 @@ const ModalResult = ({stylesApp}) => {
         </section>
         <div className={styles.attempts}>
           {
-            attempts.map((attempt, index, arrAttempts) => (
+            attempts?.map((attempt, index, arrAttempts) => (
               <section className={styles.attempt} key={index}>
                 <h4 className={styles.attempt__title}>{index !== 6 ? `Intento ${index + 1}` : 'Errores ❌'}</h4>
                 <div className={styles.bar}>
