@@ -1,6 +1,9 @@
+import { useStore } from '../store/store'
 import styles from './styles/Instructions.module.css'
 
 const Instructions = ({hiddenInstruction, setHiddenInstruction}) => {
+
+  const opportunities = useStore(state => state.opportunities)
 
   const handleCerrar = () => {
     setHiddenInstruction(true)
@@ -13,7 +16,7 @@ const Instructions = ({hiddenInstruction, setHiddenInstruction}) => {
           <h2 className={styles.title}>Instrucciones</h2>
           <button onClick={handleCerrar} className={styles.x}>x</button>
         </header>
-        <p className={styles.subtitle}>Debes adivinar una palabra de cinco letras, tienes 6 intentos para hacerlo.</p>
+        <p className={styles.subtitle}>Debes adivinar una palabra de cinco letras, tienes {opportunities} intentos para hacerlo.</p>
         <ol className={styles.list}>
           <li className={styles.list__item}>
             <p className={styles.item__p}>Ingresa una palabra de exista y presiona <span className={`${styles.key} ${styles.enter} ${styles.enter}`}>enter</span> para obtener mas pistas</p>

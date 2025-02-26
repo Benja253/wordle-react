@@ -11,8 +11,10 @@ function App() {
 
   const changeWordSelected = useStore(state => state.changeWordSelected)
   const cellActive = useStore(state => state.cellActive)
-  const youWon = useStore(state => state.youWon)
+  const opportunities = useStore(state => state.opportunities)
   const arrLetters = useStore(state => state.arrLetters)
+  const changeRows = useStore(state => state.changeRows)
+  const youWon = useStore(state => state.youWon)
 
   const [hiddenInstruction, setHiddenInstruction] = useState(true)
 
@@ -25,6 +27,12 @@ function App() {
   } = useKeyDown()
 
   const notificationHTML = useRef()
+
+  useEffect(() => {
+    if(opportunities) {
+      changeRows()
+    }
+  }, [opportunities])
 
   useEffect(() => {
     const cbKeyDown = e => {

@@ -8,6 +8,7 @@ const ModalResult = ({stylesApp}) => {
   const youWon = useStore(state => state.youWon)
   const wordSelected = useStore(state => state.wordSelected)
   const arrLetters = useStore(state => state.arrLetters)
+  const opportunities = useStore(state => state.opportunities)
   // const resetAllStore = useStore(state => state.resetAllStore)
   // const changeWordSelected = useStore(state => state.changeWordSelected)
 
@@ -16,8 +17,8 @@ const ModalResult = ({stylesApp}) => {
   useEffect(() => {
     let stats = JSON.parse(localStorage.getItem('stats'))
     if(!stats) {
-      localStorage.setItem('stats', JSON.stringify([0,0,0,0,0,0,0]))
-      stats = [0,0,0,0,0,0,0]
+      localStorage.setItem('stats', JSON.stringify([0,0,0,0,0,0,0,0,0]))
+      stats = [0,0,0,0,0,0,0,0,0]
     }
     if(youWon) {
       stats[arrLetters.findLastIndex(e => e[0].value !== '')] += 1
@@ -55,7 +56,7 @@ const ModalResult = ({stylesApp}) => {
           {
             attempts?.map((attempt, index, arrAttempts) => (
               <section className={styles.attempt} key={index}>
-                <h4 className={styles.attempt__title}>{index !== 6 ? `Intento ${index + 1}` : 'Errores ❌'}</h4>
+                <h4 className={styles.attempt__title}>{index !== opportunities ? `Intento ${index + 1}` : 'Errores ❌'}</h4>
                 <div className={styles.bar}>
                   <div className={styles.bar__int} style={getStyte(attempt, arrAttempts)}>
                   </div>

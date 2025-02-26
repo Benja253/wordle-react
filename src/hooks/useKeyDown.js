@@ -6,6 +6,8 @@ import { wordExist } from "../utils/wordExist"
 const useKeyDown = () => {
 
   const wordLength = useStore(state => state.wordLength)
+
+  const opportunities = useStore(state => state.opportunities)
   
   const wordSelected = useStore(state => state.wordSelected)
 
@@ -76,10 +78,10 @@ const useKeyDown = () => {
             changeStatus(arrStatus[i].status, i)
           }, 200 * i)
         }
-        if(row + 1 < 6) {
+        if(row + 1 < opportunities) {
           changeRow(row + 1)
         }
-        if(row + 1 === 6 && !arrStatus.every(e => e.status === 'perfect') && arrLetters[row][wordLength - 1] !== '') {
+        if(row + 1 === opportunities && !arrStatus.every(e => e.status === 'perfect') && arrLetters[row][wordLength - 1] !== '') {
           changeYouWon(false)
         }
       } else {

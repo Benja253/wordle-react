@@ -2,19 +2,16 @@ import { create } from 'zustand'
 
 const cellActiveInitial = {row: 0, cell:0}
 
-const arrLetterInitial = [
-  [{value: '', status: 'none'},{value: '', status: 'none'}],
-  [{value: '', status: 'none'},{value: '', status: 'none'}],
-  [{value: '', status: 'none'},{value: '', status: 'none'}],
-  [{value: '', status: 'none'},{value: '', status: 'none'}],
-  [{value: '', status: 'none'},{value: '', status: 'none'}],
-  [{value: '', status: 'none'},{value: '', status: 'none'}],
-]
+const arrLetterInitial = []
 
 export const useStore = create((set) => ({
   // Palabra seleccionada
   wordSelected: '',
   changeWordSelected: (newWord) => set(() => ({wordSelected: newWord})),
+
+  // Cantidad de filas o oportunidades del wordle
+  opportunities: 8,
+  changeOpportunities: (newValue) => set(() => ({opportunities: newValue})),
 
   // Estado que indique si ganaste o perdiste
   youWon: null,
@@ -44,12 +41,19 @@ export const useStore = create((set) => ({
   }),
   changeStatus: (newStatus, cell) => set(state => {
     console.log(state.cellActive.row)
-    if(state.arrLetters[4][state.wordLength - 1].status !== 'none') {
+    if(state.arrLetters[state.opportunities - 2][state.wordLength - 1].status !== 'none') {
       state.arrLetters[state.cellActive.row][cell].status = newStatus
     } else {
       state.arrLetters[state.cellActive.row === 0 ? state.cellActive.row : state.cellActive.row - 1][cell].status = newStatus
     }
     return {arrLetters: [...state.arrLetters]}
+  }),
+  changeRows: () => set(state => {
+    const arrPivot = []
+    for(let i = 0; i < state.opportunities;i++) {
+      arrPivot.push([{value: '', status: 'none'},{value: '', status: 'none'}])
+    }
+    return {arrLetters: arrPivot}
   }),
 
   // Cantidad de letras de la palabra
