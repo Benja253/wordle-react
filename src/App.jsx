@@ -11,10 +11,10 @@ function App() {
 
   const changeWordSelected = useStore(state => state.changeWordSelected)
   const cellActive = useStore(state => state.cellActive)
-  const opportunities = useStore(state => state.opportunities)
+  const opportunitiesAndLetter = useStore(state => state.opportunitiesAndLetter)
+  const wordLength = useStore(state => state.wordLength)
   const arrLetters = useStore(state => state.arrLetters)
   const changeRows = useStore(state => state.changeRows)
-  const youWon = useStore(state => state.youWon)
 
   const [hiddenInstruction, setHiddenInstruction] = useState(true)
 
@@ -28,11 +28,12 @@ function App() {
 
   const notificationHTML = useRef()
 
+  const index = opportunitiesAndLetter.findIndex(e => e.letters === wordLength)
   useEffect(() => {
-    if(opportunities) {
+    if(opportunitiesAndLetter[index].opportunities) {
       changeRows()
     }
-  }, [opportunities])
+  }, [wordLength])
 
   useEffect(() => {
     const cbKeyDown = e => {
@@ -47,7 +48,7 @@ function App() {
     return () => {
       window.removeEventListener('keydown', cbKeyDown)
     }
-  }, [cellActive])
+  }, [cellActive, arrLetters])
 
   useEffect(() => {
     changeWordSelected(letter2[Math.floor(Math.random() * letter2.length)])

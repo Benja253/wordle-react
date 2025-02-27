@@ -7,7 +7,7 @@ const useKeyDown = () => {
 
   const wordLength = useStore(state => state.wordLength)
 
-  const opportunities = useStore(state => state.opportunities)
+  const opportunitiesAndLetter = useStore(state => state.opportunitiesAndLetter)
   
   const wordSelected = useStore(state => state.wordSelected)
 
@@ -69,7 +69,7 @@ const useKeyDown = () => {
 
   // Enter
   const pressEnter = (e, notificationHTML, styles) => {
-    const word = arrLetters[row].reduce((acc, cv) => acc + cv.value.toLowerCase(), '')
+    const word = arrLetters[row]?.reduce((acc, cv) => acc + cv.value.toLowerCase(), '')
     if(e.key === "Enter" && word.length === wordLength) {
       if(wordExist(word)) {
         const arrStatus = compareWord(word, wordSelected, changeYouWon)
@@ -78,10 +78,11 @@ const useKeyDown = () => {
             changeStatus(arrStatus[i].status, i)
           }, 200 * i)
         }
-        if(row + 1 < opportunities) {
+        let index = opportunitiesAndLetter.findIndex(e => e.letters === wordLength)
+        if(row + 1 < opportunitiesAndLetter[index].opportunities) {
           changeRow(row + 1)
         }
-        if(row + 1 === opportunities && !arrStatus.every(e => e.status === 'perfect') && arrLetters[row][wordLength - 1] !== '') {
+        if(row + 1 === opportunitiesAndLetter[index].opportunities && !arrStatus.every(e => e.status === 'perfect') && arrLetters[row][wordLength - 1] !== '') {
           changeYouWon(false)
         }
       } else {

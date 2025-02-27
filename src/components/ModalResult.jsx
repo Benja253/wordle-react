@@ -7,8 +7,9 @@ const ModalResult = ({stylesApp}) => {
 
   const youWon = useStore(state => state.youWon)
   const wordSelected = useStore(state => state.wordSelected)
+  const wordLength = useStore(state => state.wordLength)
   const arrLetters = useStore(state => state.arrLetters)
-  const opportunities = useStore(state => state.opportunities)
+  const opportunitiesAndLetter = useStore(state => state.opportunitiesAndLetter)
   // const resetAllStore = useStore(state => state.resetAllStore)
   // const changeWordSelected = useStore(state => state.changeWordSelected)
 
@@ -16,20 +17,41 @@ const ModalResult = ({stylesApp}) => {
 
   useEffect(() => {
     let stats = JSON.parse(localStorage.getItem('stats'))
+    const arr = []
+    const index = opportunitiesAndLetter.findIndex(e => e.letters == wordLength)
+    for(let i = 0;i <= opportunitiesAndLetter[index].opportunities; i++) {
+      arr.push(0)
+    }
     if(!stats) {
-      localStorage.setItem('stats', JSON.stringify([0,0,0,0,0,0,0,0,0]))
-      stats = [0,0,0,0,0,0,0,0,0]
+      stats = {[wordLength]: arr}
+      localStorage.setItem('stats', JSON.stringify(stats))
+    }
+    if(stats && !stats[wordLength]) {
+      stats = {...stats, [wordLength]: arr}
+    }
+
+    if(stats?.[wordLength] && stats?.[wordLength].length !== wordLength + 1) {
+      const arr = []
+      for(let i = 0;i <= wordLength; i++) {
+        arr.push(0)
+      }
+      stats = {...stats, [index]: arr}
     }
     if(youWon) {
-      stats[arrLetters.findLastIndex(e => e[0].value !== '')] += 1
+      stats[wordLength][arrLetters.findLastIndex(e => e[0].value !== '')] += 1
       localStorage.setItem('stats', JSON.stringify(stats))
     }
     if(youWon === false) {
-      stats[stats.length - 1] += 1
+      stats[wordLength][stats[wordLength].length - 1] += 1
       localStorage.setItem('stats', JSON.stringify(stats))
     }
-    setAttempts(stats)
+
+    setAttempts(stats[wordLength])
   }, [youWon])
+  
+  useEffect(() => {
+    const stats = JSON.parse(localStorage.getItem('stats'))
+  }, [wordLength])
 
   const getStyte = (attempt, arrAttempts) => {
     const maxAttempt = arrAttempts.reduce((acc, cv) => cv > acc ? cv : acc , -Infinity)
@@ -56,7 +78,7 @@ const ModalResult = ({stylesApp}) => {
           {
             attempts?.map((attempt, index, arrAttempts) => (
               <section className={styles.attempt} key={index}>
-                <h4 className={styles.attempt__title}>{index !== opportunities ? `Intento ${index + 1}` : 'Errores ❌'}</h4>
+                <h4 className={styles.attempt__title}>{index !== arrAttempts.length - 1 ? `Intento ${index + 1}` : 'Errores ❌'}</h4>
                 <div className={styles.bar}>
                   <div className={styles.bar__int} style={getStyte(attempt, arrAttempts)}>
                   </div>

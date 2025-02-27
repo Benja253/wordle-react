@@ -5,9 +5,14 @@ import styles from './styles/Box.module.css'
 const Box = () => {
 
   const arrLetters = useStore(state => state.arrLetters)
+  const wordLength = useStore(state => state.wordLength)
+
+  const objStyle = {
+    maxWidth: `${5*wordLength}em`
+  }
 
   return (
-    <div className={styles.box}>
+    <div className={styles.box} style={objStyle}>
       {
         arrLetters.map((row, rowNumber) => (
           <Row

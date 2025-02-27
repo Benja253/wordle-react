@@ -4,14 +4,23 @@ const cellActiveInitial = {row: 0, cell:0}
 
 const arrLetterInitial = []
 
+const opportunitiesAndLetterInitial = [
+  { letters: 2, opportunities: 8 }, 
+  { letters: 3, opportunities: 7 }, 
+  { letters: 4, opportunities: 6 }, 
+  { letters: 5, opportunities: 6 }, 
+  { letters: 6, opportunities: 6 }, 
+  { letters: 7, opportunities: 5 },
+  { letters: 8, opportunities: 4 },
+  { letters: 9, opportunities: 4 }
+]
+
 export const useStore = create((set) => ({
   // Palabra seleccionada
   wordSelected: '',
   changeWordSelected: (newWord) => set(() => ({wordSelected: newWord})),
 
-  // Cantidad de filas o oportunidades del wordle
-  opportunities: 8,
-  changeOpportunities: (newValue) => set(() => ({opportunities: newValue})),
+  opportunitiesAndLetter: opportunitiesAndLetterInitial,
 
   // Estado que indique si ganaste o perdiste
   youWon: null,
@@ -41,7 +50,8 @@ export const useStore = create((set) => ({
   }),
   changeStatus: (newStatus, cell) => set(state => {
     console.log(state.cellActive.row)
-    if(state.arrLetters[state.opportunities - 2][state.wordLength - 1].status !== 'none') {
+    const index = state.opportunitiesAndLetter.findIndex(e => e.letters === state.wordLength)
+    if(state.arrLetters[state.opportunitiesAndLetter[index].opportunities - 2][state.wordLength - 1].status !== 'none') {
       state.arrLetters[state.cellActive.row][cell].status = newStatus
     } else {
       state.arrLetters[state.cellActive.row === 0 ? state.cellActive.row : state.cellActive.row - 1][cell].status = newStatus
@@ -50,15 +60,20 @@ export const useStore = create((set) => ({
   }),
   changeRows: () => set(state => {
     const arrPivot = []
-    for(let i = 0; i < state.opportunities;i++) {
-      arrPivot.push([{value: '', status: 'none'},{value: '', status: 'none'}])
+    const index = state.opportunitiesAndLetter.findIndex(e => e.letters === state.wordLength)
+    for(let i = 0; i < state.opportunitiesAndLetter[index].opportunities;i++) {
+      const arrLettersPivot = []
+      for(let j = 0;j < state.wordLength; j++) {
+        arrLettersPivot.push({value: '', status: 'none'})
+      }
+      arrPivot.push(arrLettersPivot)
     }
-    return {arrLetters: arrPivot}
+    return {arrLetters: [...arrPivot]}
   }),
 
   // Cantidad de letras de la palabra
   wordLength: 2,
-  setWordLength: (newLength) => set(state => {wordLength: newLength}),
+  setWordLength: (newLength) => set(() => ({wordLength: newLength})),
 
   resetAllStore: () => set(() => ({
     youWon: null,
