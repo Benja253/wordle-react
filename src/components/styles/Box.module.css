@@ -1,6 +1,6 @@
 .box {
   display: grid;
-  gap: 0.3em;
+  gap: 0.3em 2em;
   margin: 0 auto 2.5em;
   width: 100%;
   max-width: 12em;
@@ -56,5 +56,10 @@
 @media screen and (max-width: 720px) {
   .box {
     font-size: 0.9em;
+  }
+}
+@media screen and (max-height: 840px) {
+  .box {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

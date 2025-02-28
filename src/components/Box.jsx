@@ -8,7 +8,7 @@ const Box = () => {
   const wordLength = useStore(state => state.wordLength)
 
   const objStyle = {
-    maxWidth: `${5*wordLength}em`
+    maxWidth: `${wordLength > 3 ? 4*wordLength : 9*wordLength}em`
   }
 
   return (
