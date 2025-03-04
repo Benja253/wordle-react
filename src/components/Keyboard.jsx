@@ -23,7 +23,7 @@ const Keyboard = ({ notificationHTML, stylesApp }) => {
   const handleEnter = () => {
     const word = arrLetters[row].reduce((acc, cv) => acc + cv.value.toLowerCase(), '')
     if(word.length === wordLength) {
-      if(wordExist(word)) {
+      if(wordExist(word, wordLength)) {
         const arrStatus = compareWord(word, wordSelected, changeYouWon)
         for(let i = 0; i < word.length; i++) {
           setTimeout(() => {

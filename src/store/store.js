@@ -49,7 +49,6 @@ export const useStore = create((set) => ({
     return {arrLetters: [...state.arrLetters]}
   }),
   changeStatus: (newStatus, cell) => set(state => {
-    console.log(state.cellActive.row)
     const index = state.opportunitiesAndLetter.findIndex(e => e.letters === state.wordLength)
     if(state.arrLetters[state.opportunitiesAndLetter[index].opportunities - 2][state.wordLength - 1].status !== 'none') {
       state.arrLetters[state.cellActive.row][cell].status = newStatus

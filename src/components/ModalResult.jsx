@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { letter2 } from '../bd/words'
 import { useStore } from '../store/store'
 import styles from './styles/ModalResult.module.css'
 
@@ -10,8 +9,6 @@ const ModalResult = ({stylesApp}) => {
   const wordLength = useStore(state => state.wordLength)
   const arrLetters = useStore(state => state.arrLetters)
   const opportunitiesAndLetter = useStore(state => state.opportunitiesAndLetter)
-  // const resetAllStore = useStore(state => state.resetAllStore)
-  // const changeWordSelected = useStore(state => state.changeWordSelected)
 
   const [attempts, setAttempts] = useState()
 
@@ -29,13 +26,12 @@ const ModalResult = ({stylesApp}) => {
     if(stats && !stats[wordLength]) {
       stats = {...stats, [wordLength]: arr}
     }
-
-    if(stats?.[wordLength] && stats?.[wordLength].length !== wordLength + 1) {
+    if(stats?.hasOwnProperty[wordLength] && stats?.[wordLength].length !== (wordLength + 1)) {
       const arr = []
       for(let i = 0;i <= wordLength; i++) {
         arr.push(0)
       }
-      stats = {...stats, [index]: arr}
+      stats = {...stats, [wordLength]: arr}
     }
     if(youWon) {
       stats[wordLength][arrLetters.findLastIndex(e => e[0].value !== '')] += 1
@@ -45,13 +41,8 @@ const ModalResult = ({stylesApp}) => {
       stats[wordLength][stats[wordLength].length - 1] += 1
       localStorage.setItem('stats', JSON.stringify(stats))
     }
-
     setAttempts(stats[wordLength])
   }, [youWon])
-  
-  useEffect(() => {
-    const stats = JSON.parse(localStorage.getItem('stats'))
-  }, [wordLength])
 
   const getStyte = (attempt, arrAttempts) => {
     const maxAttempt = arrAttempts.reduce((acc, cv) => cv > acc ? cv : acc , -Infinity)

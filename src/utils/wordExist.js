@@ -1,5 +1,5 @@
-import { letter2 } from "../bd/words"
+import { todasLasPalabras } from "../bd/words"
 
-export const wordExist = (word) => {
-  return letter2.includes(word)
+export const wordExist = (word, wordLength) => {
+  return todasLasPalabras[wordLength].includes(word)
 }

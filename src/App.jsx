@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './App.module.css'
 import useKeyDown from './hooks/useKeyDown'
-import { letter2 } from './bd/words'
+import { palabrasSeleccionadas } from './bd/words'
 import { useStore } from './store/store'
 import { Notification, Box, Keyboard } from './components'
 import ModalResult from './components/ModalResult'
@@ -51,8 +51,8 @@ function App() {
   }, [cellActive, arrLetters])
 
   useEffect(() => {
-    changeWordSelected(letter2[Math.floor(Math.random() * letter2.length)])
-  }, [])
+    changeWordSelected(palabrasSeleccionadas[wordLength][Math.floor(Math.random() * palabrasSeleccionadas[wordLength].length)])
+  }, [wordLength])
 
   const handleInstructions = () => {
     setHiddenInstruction(false)
