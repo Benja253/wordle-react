@@ -14,6 +14,7 @@ const Keyboard = ({ notificationHTML, stylesApp }) => {
   const changeStatus = useStore(state => state.changeStatus)
   const cellActive = useStore(state => state.cellActive)
   const wordSelected = useStore(state => state.wordSelected)
+  const opportunitiesAndLetter = useStore(state => state.opportunitiesAndLetter)
   const {row, cell} = cellActive
   
   const handleBackspace = () => {
@@ -30,10 +31,10 @@ const Keyboard = ({ notificationHTML, stylesApp }) => {
             changeStatus(arrStatus[i].status, i)
           }, 200 * i)
         }
-        if(row + 1 < 6) {
+        if(row + 1 < opportunitiesAndLetter[opportunitiesAndLetter.findIndex(e => e.letters == wordLength)].opportunities) {
           changeRow(row + 1)
         }
-        if(row + 1 === 6 && !arrStatus.every(e => e.status === 'perfect') && arrLetters[row][wordLength - 1] !== '') {
+        if(row + 1 === opportunitiesAndLetter[opportunitiesAndLetter.findIndex(e => e.letters == wordLength)].opportunities && !arrStatus.every(e => e.status === 'perfect') && arrLetters[row][wordLength - 1] !== '') {
           changeYouWon(false)
         }
       } else {
