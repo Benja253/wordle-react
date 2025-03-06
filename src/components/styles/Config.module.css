@@ -48,8 +48,9 @@
   color: var(--font-color);
 }
 .toggle {
-  width: 3em;
-  aspect-ratio: 2.2;
+  --width-toggle: 3em;
+  width: var(--width-toggle);
+  height: calc(var(--width-toggle) / 1.91);
   background-color: var(--keyboard-color);
   border-radius: 2em;
   padding: 0.1em;
@@ -65,7 +66,7 @@
 .dark {
   background-color: var(--perfect-color);
   & .toggle__btn {
-    transform: translateX(120%);
+    transform: translateX(93%);
   }
 }
 .toggle__btn {

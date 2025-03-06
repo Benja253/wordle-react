@@ -129,8 +129,9 @@
   position: relative;
   font-size: 1.5em;
   font-weight: 500;
-  width: 1.8em;
-  aspect-ratio: 0.9;
+  --width: 1.8em;
+  width: var(--width);
+  height: calc(var(--width)/0.9);
   border-radius: 0.2em;
   cursor: pointer;
   overflow: hidden;
@@ -164,5 +165,8 @@
 @media screen and (max-width: 720px) {
   .instructions__container {
     font-size: 0.85rem;
+  }
+  .instructions {
+    padding: 0 1em 0;
   }
 }

@@ -14,6 +14,7 @@
   border-radius: 50%;
   background-color: var(--purple-light);
   color: var(--bg-body);
+  user-select: none;
   &:hover {
     filter: brightness(1.1);
   }
@@ -22,9 +23,9 @@
   position: fixed;
   display: grid;
   place-content: center;
-  top: 0.7em;
+  top: 0.6em;
   right: 1.2em;
-  font-size: 2.2em;
+  font-size: 2em;
   width: 1.8em;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -32,6 +33,7 @@
   color: var(--bg-body);
   z-index: 1;
   transition: transform 1000ms ease;
+  user-select: none;
   &:hover {
     transform: rotate(-0.75turn);
     filter: brightness(1.1);
@@ -61,6 +63,7 @@
   left: 50%;
   transform: translateX(-50%);
   transition: top 200ms ease;
+  z-index: 1;
 }
 .hidden {
   top: -3em;
@@ -71,5 +74,11 @@
 @media screen and (max-width: 720px) {
   .title {
     font-size: 1.8em;
+  }
+  .btn__instructions {
+    font-size: 1.17em;
+  }
+  .config {
+    font-size: 1.8em
   }
 }
