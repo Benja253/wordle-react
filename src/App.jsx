@@ -71,7 +71,6 @@ function App() {
 
     // wordLength
     const wordLengthIs = JSON.parse(localStorage.getItem('wordLength'))
-    console.log(wordLength)
     if(wordLengthIs == null) {
       localStorage.setItem('wordLength', wordLength)
     } else {
@@ -104,7 +103,7 @@ function App() {
     <div className={`${styles.app}`}>
       <button onClick={handleInstructions} className={styles.btn__instructions}>?</button>
       <button onClick={handleConfig} className={styles.config}>
-        <i class='bx bx-cog'></i>
+        <i className='bx bx-cog'></i>
       </button>
       <Instructions
         hiddenInstruction={hiddenInstruction}
