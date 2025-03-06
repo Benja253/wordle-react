@@ -16,6 +16,10 @@ const opportunitiesAndLetterInitial = [
 ]
 
 export const useStore = create((set) => ({
+  // Dark o Light mode
+  darkMode: true,
+  changeDarkMode: (newValue) => set(() => ({darkMode: newValue})),
+
   // Palabra seleccionada
   wordSelected: '',
   changeWordSelected: (newWord) => set(() => ({wordSelected: newWord})),
@@ -71,7 +75,7 @@ export const useStore = create((set) => ({
   }),
 
   // Cantidad de letras de la palabra
-  wordLength: 2,
+  wordLength: 5,
   setWordLength: (newLength) => set(() => ({wordLength: newLength})),
 
   resetAllStore: () => set(() => ({

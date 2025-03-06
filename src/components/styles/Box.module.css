@@ -21,6 +21,7 @@
   border: 1px solid var(--purple-dark);
   cursor: pointer;
   overflow: hidden;
+  color: var(--font-color);
   &:hover {
     filter: brightness(1.1);
   }
@@ -46,12 +47,15 @@
 }
 .perfect {
   background-color: var(--perfect-color);
+  color: var(--keyboard-font-color);
 }
 .imperfect {
   background-color: var(--imperfect-color);
+  color: var(--keyboard-font-color);
 }
 .no {
   background-color: var(--no-color);
+  color: var(--keyboard-font-color);
 }
 @media screen and (max-width: 720px) {
   .box {

@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-  --bg-body: #1b1b1f;
-  --font-color: #dfdfd6;
-  --purple-light: #9499ff;
-  --purple-medium: #6eacda;
-  --purple-dark: #2d3e53;
+  --bg-body:#dddddb;
+  --bg-modals: #e8e6e6;
+  --font-color: #1b1b1f;
+  --purple-light: #1b1b1f;
+  --purple-medium:rgb(13, 71, 116);
+  --purple-dark:#8686868b;
   --perfect-color:#2b762b;
   --imperfect-color:#9d8c1b;
-  --no-color: #2a2a2ae0;
+  --no-color:#868686;
   --btn-red-color: #d43535;
+  --keyboard-color: #3f4752;
+  --keyboard-font-color: #dddddb;
 }
-
 html {
   font-family: "Poppins", serif;
   box-sizing: border-box;
@@ -19,7 +21,23 @@ html {
 }
 body {
   background: var(--bg-body);
+  transition: background 600ms ease;
   margin: 0;
+}
+.dark {
+  --bg-body: #1b1b1f;
+  --bg-modals: #1b1b1f;
+  --font-color: #dfdfd6;
+  --font-soft: #aaa;
+  --purple-light: #9499ff;
+  --purple-medium: #6eacda;
+  --purple-dark: #2d3e53;
+  --perfect-color:#2b762b;
+  --imperfect-color:#9d8c1b;
+  --no-color: #2a2a2ae0;
+  --btn-red-color: #d43535;
+  --keyboard-color: #3f4752;
+  --keyboard-font-color: #dddddb;
 }
 h1, h2 ,h3 ,h4, p, ul {
   margin-top: 0;
@@ -32,4 +50,8 @@ button {
   border: none;
   font-family: inherit;
   cursor: pointer;
+}
+select {
+  font-family: inherit;
+  outline: none;
 }

@@ -18,6 +18,25 @@
     filter: brightness(1.1);
   }
 }
+.config {
+  position: fixed;
+  display: grid;
+  place-content: center;
+  top: 0.7em;
+  right: 1.2em;
+  font-size: 2.2em;
+  width: 1.8em;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--purple-light);
+  color: var(--bg-body);
+  z-index: 1;
+  transition: transform 1000ms ease;
+  &:hover {
+    transform: rotate(-0.75turn);
+    filter: brightness(1.1);
+  }
+}
 .title {
   text-align: center;
   padding: 1em 0 0.5em;
@@ -25,10 +44,14 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
 }
 .notification {
   width: 15em;
-  background-color: var(--purple-dark);
+  background-color: var(--keyboard-color);
+  color: var(--keyboard-font-color);
   text-align: center;
   padding: 0.7em 0;
   border-radius: 0.8em;
@@ -37,7 +60,6 @@
   top: 1.6em;
   left: 50%;
   transform: translateX(-50%);
-  opacity: 0.95;
   transition: top 200ms ease;
 }
 .hidden {

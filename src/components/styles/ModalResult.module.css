@@ -9,7 +9,7 @@
 .modal__int {
   width: 100%;
   max-width: 20em;
-  background-color: var(--bg-body);
+  background-color: var(--bg-modals);
   box-shadow: 0 0 1em rgba(33, 62, 147, 0.251);
   padding: 2em 1.5em;
   border-radius: 1em;
@@ -30,7 +30,7 @@
 }
 .selected__p {
   font-weight: 300;
-  color: #aaa;
+  color: var(--font-soft);
   text-align: center;
 }
 .selected__word {

@@ -1,0 +1,95 @@
+.config {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: var(--bg-modals);
+  z-index: 1;
+  padding: 1em 3em 2em 2em;
+  border: 1px solid var(--purple-dark);
+  --border-radius: 0.7em;
+  border-radius: var(--border-radius) 0 var(--border-radius) var(--border-radius);
+  color: var(--font-color);
+  transition: transform 250ms ease;
+}
+.hidden {
+  transform: translateY(-105%)
+}
+.title {
+  font-size: 1.1em;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 0.8em;
+  padding-top: 1em;
+}
+.list {
+  list-style: none;
+  display: grid;
+  gap: 1em;
+  border-top: 1px solid currentColor;
+  padding: 1em 0;
+}
+.item {
+  display: grid;
+  grid-template-columns: 1fr 6em;
+  gap: 1em;
+  align-items: center;
+}
+.item__title {
+  font-size: 0.9em;
+  font-weight: 400;
+}
+.select {
+  font-size: 0.9em;
+  font-weight: 500;
+  width: 7.5em;
+  padding: 0.3em 0.5em;
+  border-radius: 0.5em;
+  background-color: var(--bg-body);
+  color: var(--font-color);
+}
+.toggle {
+  width: 3em;
+  aspect-ratio: 2.2;
+  background-color: var(--keyboard-color);
+  border-radius: 2em;
+  padding: 0.1em;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+  &:hover {
+    filter: brightness(1.1);
+    & .toggle__btn {
+      filter: brightness(1);
+    }
+  }
+}
+.dark {
+  background-color: var(--perfect-color);
+  & .toggle__btn {
+    transform: translateX(120%);
+  }
+}
+.toggle__btn {
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--bg-body);
+  filter: brightness(1.3);
+  transition: transform 200ms ease, background-color 200ms ease;
+}
+.footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 1em;
+}
+.close {
+  font-size: 0.9em;
+  font-weight: 700;
+  width: 10em;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  background-color: var(--btn-red-color);
+  color: var(--keyboard-font-color);
+  &:hover {
+    filter: brightness(1.1)
+  }
+}

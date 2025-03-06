@@ -3,7 +3,7 @@
   min-height: 100vh;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   background-color: var(--bg-body);
   transition: transform 300ms ease;
 }
@@ -15,12 +15,13 @@
   margin: 0 auto;
   padding: 3em 1em 0;
   user-select: none;
+  color: var(--font-color);
 }
 .header {
   position: relative;
   width: 100%;
   background-color: var(--purple-light);
-  color: #000;
+  color: var(--bg-body);
   border-radius: 0.5em;
   padding: 0.2em;
   overflow: hidden;
@@ -39,7 +40,7 @@
   aspect-ratio: 1;
   border-radius: 0.3em;
   background-color: var(--btn-red-color);
-  color: var(--font-color);
+  color: #dddddb;
   &:hover {
     filter: brightness(1.1);
   }
@@ -57,11 +58,14 @@
     color: var(--purple-light);
   }
 }
+.list__item__1 {
+  margin-bottom: 1em;
+}
 .item__p {
   font-weight: 300;
   display: flex;
   gap: 0.5em;
-  align-items: center;
+  align-items: end;
   margin-bottom: 0.4em;
 }
 .enter {
@@ -93,7 +97,7 @@
   padding: 0.5em;
   border-radius: 0.5em;
   background-color: var(--btn-red-color);
-  color: var(--font-color);
+  color: var(--keyboard-font-color);
   &:hover {
     filter: brightness(1.1);
   }
@@ -115,8 +119,11 @@
 }
 .enter {
   background-color: rgb(48, 122, 48);
+  color: var(--keyboard-font-color);
   border-radius: 0.4em 1em 1em 0.4em;
   width: 3.6em;
+  font-size: 0.8em;
+  align-self: end;
 }
 .letter {
   position: relative;
@@ -125,7 +132,6 @@
   width: 1.8em;
   aspect-ratio: 0.9;
   border-radius: 0.2em;
-  border: 1px solid var(--purple-dark);
   cursor: pointer;
   overflow: hidden;
   &:hover {
@@ -145,10 +151,18 @@
 }
 .no {
   background-color: var(--no-color);
+  color: var(--keyboard-font-color);
 }
 .imperfect {
   background-color: var(--imperfect-color);
+  color: var(--keyboard-font-color);
 }
 .perfect {
   background-color: var(--perfect-color);
+  color: var(--keyboard-font-color);
+}
+@media screen and (max-width: 720px) {
+  .instructions__container {
+    font-size: 0.85rem;
+  }
 }

@@ -3,7 +3,7 @@ import styles from './App.module.css'
 import useKeyDown from './hooks/useKeyDown'
 import { palabrasSeleccionadas } from './bd/words'
 import { useStore } from './store/store'
-import { Notification, Box, Keyboard } from './components'
+import { Notification, Box, Keyboard, Config } from './components'
 import ModalResult from './components/ModalResult'
 import Instructions from './components/Instructions'
 
@@ -13,10 +13,14 @@ function App() {
   const cellActive = useStore(state => state.cellActive)
   const opportunitiesAndLetter = useStore(state => state.opportunitiesAndLetter)
   const wordLength = useStore(state => state.wordLength)
+  const setWordLength = useStore(state => state.setWordLength)
   const arrLetters = useStore(state => state.arrLetters)
   const changeRows = useStore(state => state.changeRows)
+  const darkMode = useStore(state => state.darkMode)
+  const changeDarkMode = useStore(state => state.changeDarkMode)
 
   const [hiddenInstruction, setHiddenInstruction] = useState(true)
+  const [hiddenConfig, setHiddenConfig] = useState(true)
 
   const {
     pressArrowRight,
@@ -51,6 +55,31 @@ function App() {
   }, [cellActive, arrLetters])
 
   useEffect(() => {
+    // Dark Mode
+    const isDark = JSON.parse(localStorage.getItem('darkMode'))
+    if(isDark == null) {
+      localStorage.setItem('darkMode', JSON.stringify(true))
+    }
+    if(isDark === true) {
+      changeDarkMode(true)
+      document.body.classList.add('dark')
+    }
+    if(isDark === false) {
+      changeDarkMode(false)
+      document.body.classList.remove('dark')
+    }
+
+    // wordLength
+    const wordLengthIs = JSON.parse(localStorage.getItem('wordLength'))
+    console.log(wordLength)
+    if(wordLengthIs == null) {
+      localStorage.setItem('wordLength', wordLength)
+    } else {
+      setWordLength(JSON.parse(localStorage.getItem('wordLength')))
+    }
+  }, [])
+
+  useEffect(() => {
     changeWordSelected(palabrasSeleccionadas[wordLength][Math.floor(Math.random() * palabrasSeleccionadas[wordLength].length)])
   }, [wordLength])
 
@@ -58,21 +87,41 @@ function App() {
     setHiddenInstruction(false)
   }
 
+  const handleConfig = () => {
+    setHiddenConfig(false)
+  }
+
+  useEffect(() => {
+    document.body.classList.add('dark')
+    if(!darkMode) {
+      document.body.classList.remove('dark')
+    } else {
+      document.body.classList.add('dark')
+    }
+  }, [darkMode])
+
   return (
     <div className={`${styles.app}`}>
       <button onClick={handleInstructions} className={styles.btn__instructions}>?</button>
+      <button onClick={handleConfig} className={styles.config}>
+        <i class='bx bx-cog'></i>
+      </button>
       <Instructions
         hiddenInstruction={hiddenInstruction}
         setHiddenInstruction={setHiddenInstruction}
+      />
+      <Config 
+        hiddenConfig={hiddenConfig}
+        setHiddenConfig={setHiddenConfig}
       />
       <Notification
         notificationHTML={notificationHTML} 
         styles={styles}
       />
       <ModalResult
-        stylesApp={styles} 
+        stylesApp={styles}
       />
-      <h1 className={`${styles.title}`}>Wordle</h1>
+      <h1 className={`${styles.title}`}>wordle</h1>
       <Box />
       <Keyboard
         notificationHTML={notificationHTML}

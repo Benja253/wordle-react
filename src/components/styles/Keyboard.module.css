@@ -19,12 +19,12 @@
     grid-column: 10;
   }
   & .key:nth-child(1) {
-    background-color: rgb(182, 65, 65);
+    background-color: #b64141;
     border-radius: 1em 0.4em 0.4em 1em;
     width: 3em;
   }
   & .key:nth-last-child(1) {
-    background-color: rgb(48, 122, 48);
+    background-color: #307a30;
     border-radius: 0.4em 1em 1em 0.4em;
     width: 3.6em;
   }
@@ -34,11 +34,12 @@
   height: 2.7em;
   display: grid;
   place-content: center;
-  background-color: rgb(63, 71, 82);
+  background-color: var(--keyboard-color);
   border-radius: 0.4em;
   text-transform: uppercase;
   font-weight: 600;
   cursor: pointer;
+  color: var(--keyboard-font-color);
   &:hover {
     filter: brightness(1.1);
   }

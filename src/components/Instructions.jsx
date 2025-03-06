@@ -5,6 +5,7 @@ const Instructions = ({hiddenInstruction, setHiddenInstruction}) => {
 
   const opportunitiesAndLetter = useStore(state => state.opportunitiesAndLetter)
   const wordLength = useStore(state => state.wordLength)
+  
   const opportunities = opportunitiesAndLetter[opportunitiesAndLetter.findIndex(e => e.letters === wordLength)].opportunities
 
   const handleCerrar = () => {
@@ -21,7 +22,10 @@ const Instructions = ({hiddenInstruction, setHiddenInstruction}) => {
         <p className={styles.subtitle}>Debes adivinar una palabra de {wordLength} letras, tienes {opportunities} intentos para hacerlo.</p>
         <ol className={styles.list}>
           <li className={styles.list__item}>
-            <p className={styles.item__p}>Ingresa una palabra de exista y presiona <span className={`${styles.key} ${styles.enter} ${styles.enter}`}>enter</span> para obtener mas pistas</p>
+            <div className={styles.list__item__1}>
+              <p className={styles.item__p}>Ingresa una palabra de exista y presiona enter para obtener mas pistas</p>
+              <div className={`${styles.key} ${styles.enter} ${styles.enter}`}>enter</div>
+            </div>
             <div className={styles.key__container}>
               <div className={`${styles.letter}`}>
                 <div className={`${styles.front} ${styles.perfect}`}>x</div>
