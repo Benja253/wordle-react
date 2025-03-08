@@ -17,6 +17,7 @@
   position: absolute;
   left: 50%;
   transform: translate(-50%, 5.5em);
+  color: var(--font-color);
 }
 .title {
   text-align: center;

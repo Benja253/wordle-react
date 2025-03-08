@@ -7,7 +7,7 @@ export const compareWord = (word, wordSelected, changeYouWon) => {
   let response = []
 
   // Contar caracteres
-  const letterQuantity = word.split("").reduce((acc, cv) => {
+  const letterQuantity = wordSelected.split("").reduce((acc, cv) => {
     if(acc.hasOwnProperty(cv)) {
       acc[cv] += 1
     } else {
@@ -15,6 +15,8 @@ export const compareWord = (word, wordSelected, changeYouWon) => {
     }
     return acc
   }, {})
+
+  console.log({letterQuantity, wordSelected})
 
   // Encontrar coincidencia perfecta
   for(let i = 0; i < word.length; i++) {
@@ -29,7 +31,7 @@ export const compareWord = (word, wordSelected, changeYouWon) => {
 
   // Encontrar coincidencias imperfectas
   for(let i = 0; i < word.length; i++) {
-    if(wordSelected.includes(word[i]) && letterQuantity[word[i]] !== 0) {
+    if(wordSelected.includes(word[i]) && letterQuantity[word[i]] !== 0 && response[i].status !== 'perfect') {
       const deleted = response.splice(i, 1)[0]
       response.splice(i, 0, {...deleted, status: 'imperfect'})
       letterQuantity[word[i]] -= 1
