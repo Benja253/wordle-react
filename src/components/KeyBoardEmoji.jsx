@@ -76,6 +76,26 @@ const KeyBoardEmoji = () => {
     }
   }
 
+  let arrLetterWithoutRow = []
+  arrLetters.forEach(e => {
+    arrLetterWithoutRow.push(...e)
+  })
+
+  const getKeySyle = (key) => {
+    const findPerfect = arrLetterWithoutRow.findIndex(e => key.toUpperCase() === e.value && e.status === 'perfect')
+    const findImperfect = arrLetterWithoutRow.findIndex(e => key.toUpperCase() === e.value && e.status === 'imperfect')
+    const findNo = arrLetterWithoutRow.findIndex(e => key.toUpperCase() === e.value && e.status === 'no')
+    if(findPerfect !== -1) {
+      return arrLetterWithoutRow[findPerfect].status
+    } else if(findImperfect !== -1) {
+      return arrLetterWithoutRow[findImperfect].status
+    } else if(findNo !== -1){
+      return arrLetterWithoutRow[findNo].status
+    } else {
+      return ''
+    }
+  }
+
   return (
     <div className={styles.keyboard}>
       <div onClick={handleDel} className={styles.del}>
@@ -84,67 +104,67 @@ const KeyBoardEmoji = () => {
       <div className={styles.row}>
         <div 
           onClick={() => handleAddEmoji('q')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐶')]}`}
         >🐶<div className={styles.letter}>q</div></div>
         <div 
           onClick={() => handleAddEmoji('w')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐱')]}`}
         >🐱<div className={styles.letter}>w</div></div>
         <div 
           onClick={() => handleAddEmoji('e')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐭')]}`}
         >🐭<div className={styles.letter}>e</div></div>
         <div 
           onClick={() => handleAddEmoji('r')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐹')]}`}
         >🐹<div className={styles.letter}>r</div></div>
         <div 
           onClick={() => handleAddEmoji('t')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐰')]}`}
         >🐰<div className={styles.letter}>t</div></div>
       </div>
       <div className={styles.row}>
         <div 
           onClick={() => handleAddEmoji('a')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🦊')]}`}
         >🦊<div className={styles.letter}>a</div></div>
         <div 
           onClick={() => handleAddEmoji('s')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐻')]}`}
         >🐻<div className={styles.letter}>s</div></div>
         <div 
           onClick={() => handleAddEmoji('d')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐼')]}`}
         >🐼<div className={styles.letter}>d</div></div>
         <div 
           onClick={() => handleAddEmoji('f')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐻‍❄️')]}`}
         >🐻‍❄️<div className={styles.letter}>f</div></div>
         <div 
           onClick={() => handleAddEmoji('g')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐨')]}`}
         >🐨<div className={styles.letter}>g</div></div>
       </div>
       <div className={styles.row}>
         <div 
           onClick={() => handleAddEmoji('z')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐯')]}`}
         >🐯<div className={styles.letter}>z</div></div>
         <div 
           onClick={() => handleAddEmoji('x')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🦁')]}`}
         >🦁<div className={styles.letter}>x</div></div>
         <div 
           onClick={() => handleAddEmoji('c')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐮')]}`}
         >🐮<div className={styles.letter}>c</div></div>
         <div 
           onClick={() => handleAddEmoji('v')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐷')]}`}
         >🐷<div className={styles.letter}>v</div></div>
         <div 
           onClick={() => handleAddEmoji('b')} 
-          className={styles.key}
+          className={`${styles.key} ${styles[getKeySyle('🐸')]}`}
         >🐸<div className={styles.letter}>b</div></div>
       </div>
       <div onClick={handleEnter} className={styles.enter}>

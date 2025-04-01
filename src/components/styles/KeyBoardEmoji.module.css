@@ -42,6 +42,18 @@
     filter: brightness(1.1);
   }
 }
+.imperfect {
+  background-color: var(--imperfect-color);
+  color: var(--keyboard-font-color);
+}
+.perfect {
+  background-color: var(--perfect-color);
+  color: var(--keyboard-font-color);
+}
+.no {
+  background-color: var(--no-color);
+  color: var(--keyboard-font-color);
+}
 .letter {
   position: absolute;
   font-size: 0.5em;
