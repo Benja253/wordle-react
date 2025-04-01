@@ -20,9 +20,11 @@ const Box = () => {
     return () => window.addEventListener('resize', () => {})
   }, [])
 
+  const wordLengthStyle = wordLength === 'animaldle' ? 5 : wordLength
+
   const objStyle = {
-    maxWidth: `${wordLength > 3 ? 4*wordLength : 9*wordLength}em`,
-    gridTemplateColumns: `${(heightWindows <= 840 && wordLength == 2)|| (heightWindows <= 780 && wordLength == 3) ? 'repeat(2, 1fr)' : ''}`
+    maxWidth: `${wordLengthStyle > 3 ? 4*wordLengthStyle : 9*wordLengthStyle}em`,
+    gridTemplateColumns: `${(heightWindows <= 840 && wordLengthStyle == 2)|| (heightWindows <= 780 && wordLengthStyle == 3) ? 'repeat(2, 1fr)' : ''}`
   }
 
   return (

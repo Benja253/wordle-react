@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './App.module.css'
 import useKeyDown from './hooks/useKeyDown'
-import { palabrasSeleccionadas } from './bd/words'
+import { animaldleObj, palabrasSeleccionadas } from './bd/words'
 import { useStore } from './store/store'
-import { Notification, Box, Keyboard, Config } from './components'
-import ModalResult from './components/ModalResult'
-import Instructions from './components/Instructions'
+import { Notification, Box, Keyboard, Config, KeyBoardEmoji, ModalResult, Instructions } from './components'
 
 function App() {
 
@@ -79,7 +77,16 @@ function App() {
   }, [])
 
   useEffect(() => {
-    changeWordSelected(palabrasSeleccionadas[wordLength][Math.floor(Math.random() * palabrasSeleccionadas[wordLength].length)])
+    if(wordLength === 'animaldle') {
+      const emojis = Object.values(animaldleObj)
+      const arr = []
+      for(let i = 0; i < 5; i++) {
+        arr.push(emojis[Math.floor(Math.random() * emojis.length)])
+      }
+      changeWordSelected(arr)
+    } else {
+      changeWordSelected(palabrasSeleccionadas[wordLength][Math.floor(Math.random() * palabrasSeleccionadas[wordLength].length)])
+    }
   }, [wordLength])
 
   const handleInstructions = () => {
@@ -120,12 +127,18 @@ function App() {
       <ModalResult
         stylesApp={styles}
       />
-      <h1 className={`${styles.title}`}>wordle</h1>
+      <h1 className={`${styles.title}`}>{wordLength === 'animaldle' ? 'animaldle' : 'wordle'}</h1>
       <Box />
-      <Keyboard
-        notificationHTML={notificationHTML}
-        stylesApp={styles}
-      />
+      {
+        wordLength === 'animaldle'
+          ? <KeyBoardEmoji />
+          : (
+            <Keyboard
+              notificationHTML={notificationHTML}
+              stylesApp={styles}
+            />
+          )
+      }
     </div>
   )
 }

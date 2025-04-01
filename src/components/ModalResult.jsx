@@ -9,6 +9,7 @@ const ModalResult = ({stylesApp}) => {
   const wordLength = useStore(state => state.wordLength)
   const arrLetters = useStore(state => state.arrLetters)
   const opportunitiesAndLetter = useStore(state => state.opportunitiesAndLetter)
+  const resetAllStore = useStore(state => state.resetAllStore)
 
   const [attempts, setAttempts] = useState()
 
@@ -52,8 +53,8 @@ const ModalResult = ({stylesApp}) => {
   }
 
   const handleClick = () => {
-    location.reload()
-    // resetAllStore()
+    // location.reload()
+    resetAllStore()
     // changeWordSelected(letter2[Math.floor(Math.random() * letter2.length)])
   }
 
@@ -62,7 +63,7 @@ const ModalResult = ({stylesApp}) => {
       <article className={styles.modal__int}>
         <h2 className={`${styles.title}`}>{youWon ? 'Ganaste 🎉': 'Perdiste 😵'}</h2>
         <section className={styles.selected}>
-          <p className={styles.selected__p}>La palabra seleccionada es:</p>
+          <p className={styles.selected__p}>La {wordLength === 'animaldle' ? 'secuencia' : 'palabra'} seleccionada es:</p>
           <h3 className={`${styles.selected__word} ${styles[youWon]}`}>{wordSelected}</h3>
         </section>
         <div className={styles.attempts}>
@@ -80,7 +81,7 @@ const ModalResult = ({stylesApp}) => {
           }
         </div>
         <footer className={styles.footer}>
-          <button onClick={handleClick} className={`${styles.btn} ${styles[youWon]}`}>Jugar otra palabra</button>
+          <div onClick={handleClick} className={`${styles.btn} ${styles[youWon]}`}>Jugar otra palabra</div>
         </footer>
       </article>
     </div>

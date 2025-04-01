@@ -7,10 +7,13 @@ const Config = ({ hiddenConfig, setHiddenConfig }) => {
   const setWordLength = useStore(state => state.setWordLength)
   const darkMode = useStore(state => state.darkMode)
   const changeDarkMode = useStore(state => state.changeDarkMode)
+  const resetAllStore = useStore(state => state.resetAllStore)
 
   const handleChange = (e) => {
-    setWordLength(+e.target.value)
-    localStorage.setItem('wordLength', JSON.stringify(+e.target.value))
+    const value = e.target.value === 'animaldle' ? e.target.value : +e.target.value
+    setWordLength(value)
+    resetAllStore()
+    localStorage.setItem('wordLength', JSON.stringify(value))
   }
 
   const handleClick = () => {
@@ -32,13 +35,14 @@ const Config = ({ hiddenConfig, setHiddenConfig }) => {
       <h2 className={styles.title}>Configuración</h2>
       <ul className={styles.list}>
         <li className={styles.item}>
-          <h3 className={styles.item__title}>Cantidad de letras</h3>
+          <h3 className={styles.item__title}>Tipo Wordle</h3>
           <div className={styles.select__container}>
             <select onChange={handleChange} className={styles.select} value={wordLength} name="letterNumber">
-              <option className={styles.option} value="2">2 letras</option>
-              <option className={styles.option} value="3">3 letras</option>
-              <option className={styles.option} value="4">4 letras</option>
-              <option className={styles.option} value="5">5 letras</option>
+              <option className={styles.option} value="2">2️⃣ letras</option>
+              <option className={styles.option} value="3">3️⃣ letras</option>
+              <option className={styles.option} value="4">4️⃣ letras</option>
+              <option className={styles.option} value="5">5️⃣ letras</option>
+              <option className={styles.option} value="animaldle">🦁 animaldle</option>
             </select>
           </div>
         </li>
@@ -50,7 +54,7 @@ const Config = ({ hiddenConfig, setHiddenConfig }) => {
         </li>
       </ul>
       <footer className={styles.footer}>
-        <button onClick={handleCloseConfig} className={styles.close}>Cerrar</button>
+        <div onClick={handleCloseConfig} className={styles.close}>Cerrar</div>
       </footer>
     </div>
   )

@@ -28399,20 +28399,3 @@ export const dosLetras = [...new Set(palabras.split("\n").filter(e => e.length =
   }
   return word
 }))]
-
-export const tresLetras = [...new Set(palabras.split("\n").filter(e => e.length == 3).map(e => {
-  let word = ''
-  for(let i = 0; i < e.length;i++) {
-    word += conTildes.indexOf(e[i]) !== -1 ? sinTildes[conTildes.indexOf(e[i])] : e[i]
-  }
-  return word
-}))]
-
-export const cuatroLetter = [...new Set(palabras.split("\n").filter(e => e.length == 4).map(e => {
-  let word = ''
-  for(let i = 0; i < e.length;i++) {
-    word += conTildes.indexOf(e[i]) !== -1 ? sinTildes[conTildes.indexOf(e[i])] : e[i]
-  }
-  return word
-}))]
-console.log(cuatroLetter)

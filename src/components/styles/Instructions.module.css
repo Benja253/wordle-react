@@ -68,9 +68,6 @@
   align-items: end;
   margin-bottom: 0.4em;
 }
-.enter {
-  font-size: 0.8em;
-}
 .key__container {
   display: flex;
   gap: 0.2em;
@@ -118,12 +115,9 @@
   }
 }
 .enter {
-  background-color: rgb(48, 122, 48);
-  color: var(--keyboard-font-color);
-  border-radius: 0.4em 1em 1em 0.4em;
-  width: 3.6em;
-  font-size: 0.8em;
-  align-self: end;
+  color: rgb(30, 172, 30);
+  font-weight: 600;
+  text-transform: uppercase;
 }
 .letter {
   position: relative;

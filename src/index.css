@@ -14,6 +14,9 @@
   --keyboard-color: #3f4752;
   --keyboard-font-color: #dddddb;
 }
+* {
+  box-sizing: border-box;
+}
 html {
   font-family: "Poppins", serif;
   box-sizing: border-box;

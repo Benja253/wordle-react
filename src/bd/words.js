@@ -1,3 +1,21 @@
+export const animaldleObj = {
+  'q': '🐶',
+  'w': '🐱',
+  'e': '🐭',
+  'r': '🐹',
+  't': '🐰',
+  'a': '🦊',
+  's': '🐻',
+  'd': '🐼',
+  'f': '🐻‍❄️',
+  'g': '🐨',
+  'z': '🐯',
+  'x': '🦁',
+  'c': '🐮',
+  'v': '🐷',
+  'b': '🐸'
+}
+
 export const palabrasSeleccionadas = {
   "2": [
     "al",
@@ -8704,6 +8722,7 @@ export const todasLasPalabras = {
     "ozona",
     "ozono",
     "pacha",
+    "pache",
     "pacto",
     "padre",
     "pagar",

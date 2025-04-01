@@ -1,0 +1,82 @@
+.keyboard {
+  display: grid;
+  grid-template-columns: 4em max-content 4em;
+  gap: 0.5em;
+  width: max-content;
+  margin: auto;
+  user-select: none;
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, max-content);
+  gap: 0.25em;
+  justify-content: center;
+  --width-key: 2em;
+  --width-special-key: 4em;
+  grid-column: 2 / 3;
+  &:nth-child(2) {
+    grid-row: 1 / 2;
+  }
+  &:nth-child(3) {
+    grid-row: 2 / 3;
+  }
+  &:nth-child(4) {
+    grid-row: 3 / 4;
+  }
+}
+.key {
+  width: var(--width-key);
+  padding-right: 0.3em;
+  font-size: 1.6em;
+  display: grid;
+  justify-content: end;
+  align-items: center;
+  background-color: var(--keyboard-color);
+  border-radius: 0.4em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--keyboard-font-color);
+  position: relative;
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+.letter {
+  position: absolute;
+  font-size: 0.5em;
+  top: 0.2em;
+  left: 0.4em;
+}
+.del, .enter {
+  display: grid;
+  place-content: center;
+  color: white;
+  font-size: 1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  width: var(--width-special-key);
+  grid-row: 3 / 4;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+.del {
+  background-color: #b64141;
+  border-radius: 1em 0.4em 0.4em 1em;
+}
+.enter {
+  background-color: #307a30;
+  border-radius: 0.4em 1em 1em 0.4em;
+}
+@media screen and (max-width: 430px) {
+  .keyboard {
+    font-size: 0.95em;
+  }
+}
+@media screen and (max-width: 400px) {
+  .keyboard {
+    font-size: 0.9em;
+  }
+}

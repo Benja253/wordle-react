@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { animaldleObj, palabrasSeleccionadas } from '../bd/words'
 
 const cellActiveInitial = {row: 0, cell:0}
 
@@ -12,7 +13,8 @@ const opportunitiesAndLetterInitial = [
   { letters: 6, opportunities: 6 }, 
   { letters: 7, opportunities: 5 },
   { letters: 8, opportunities: 4 },
-  { letters: 9, opportunities: 4 }
+  { letters: 9, opportunities: 4 },
+  { letters: 'animaldle', opportunities: 6}
 ]
 
 export const useStore = create((set) => ({
@@ -53,8 +55,9 @@ export const useStore = create((set) => ({
     return {arrLetters: [...state.arrLetters]}
   }),
   changeStatus: (newStatus, cell) => set(state => {
-    const index = state.opportunitiesAndLetter.findIndex(e => e.letters === state.wordLength)
-    if(state.arrLetters[state.opportunitiesAndLetter[index].opportunities - 2][state.wordLength - 1].status !== 'none') {
+    const wordLengthState = state.wordLength === 'animaldle' ? 5 : state.wordLength
+    const index = state.opportunitiesAndLetter.findIndex(e => e.letters === wordLengthState)
+    if(state.arrLetters[state.opportunitiesAndLetter[index].opportunities - 2][wordLengthState - 1].status !== 'none') {
       state.arrLetters[state.cellActive.row][cell].status = newStatus
     } else {
       state.arrLetters[state.cellActive.row === 0 ? state.cellActive.row : state.cellActive.row - 1][cell].status = newStatus
@@ -66,7 +69,9 @@ export const useStore = create((set) => ({
     const index = state.opportunitiesAndLetter.findIndex(e => e.letters === state.wordLength)
     for(let i = 0; i < state.opportunitiesAndLetter[index].opportunities;i++) {
       const arrLettersPivot = []
-      for(let j = 0;j < state.wordLength; j++) {
+      const limit = state.wordLength === 'animaldle' ? 5 : state.wordLength
+
+      for(let j = 0;j < limit; j++) {
         arrLettersPivot.push({value: '', status: 'none'})
       }
       arrPivot.push(arrLettersPivot)
@@ -78,16 +83,23 @@ export const useStore = create((set) => ({
   wordLength: 5,
   setWordLength: (newLength) => set(() => ({wordLength: newLength})),
 
-  resetAllStore: () => set(() => ({
-    youWon: null,
-    cellActive: cellActiveInitial,
-    arrLetters: [
-      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
-      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
-      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
-      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
-      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
-      [{...{value: '', status: 'none'}},{...{value: '', status: 'none'}}],
-    ],
-  }))
+  resetAllStore: () => set(state => {
+    if(state.wordLength === 'animaldle') {
+      const emojis = Object.values(animaldleObj)
+      const arr = []
+      for(let i = 0; i < 5; i++) {
+        arr.push(emojis[Math.floor(Math.random() * emojis.length)])
+      }
+      state.changeWordSelected(arr)
+    } else {
+      state.changeWordSelected(palabrasSeleccionadas[state.wordLength][Math.floor(Math.random() * palabrasSeleccionadas[state.wordLength].length)])
+    }
+
+    state.changeRows()
+
+    return {
+      youWon: null,
+      cellActive: cellActiveInitial
+    }
+  })
 }))

@@ -1,3 +1,4 @@
+import { animaldleObj } from "../bd/words"
 import { useStore } from "../store/store"
 import { compareWord } from "../utils/compareWord"
 import { wordExist } from "../utils/wordExist"
@@ -22,10 +23,11 @@ const useKeyDown = () => {
   const changeStatus = useStore(state => state.changeStatus)
 
   const changeYouWon = useStore(state => state.changeYouWon)
-  
+
   // Mover a la derecha
   const pressArrowRight = e => {
-    if(e.key === "ArrowRight" && cellActive.cell < wordLength - 1) {
+    const wordLengthWithEmoji = wordLength === 'animaldle' ? 5 : wordLength
+    if(e.key === "ArrowRight" && cellActive.cell < wordLengthWithEmoji - 1) {
       changeCell(cellActive.cell + 1)
     }
   }
@@ -39,7 +41,7 @@ const useKeyDown = () => {
 
   // Ingreso de letras
   const pressLetters = e => {
-    if(/[a-zA-ZñÑ]/.test(e.key) && e.key.length === 1 && arrLetters[row][cell].value === '') {
+    if(/[a-zA-ZñÑ]/.test(e.key) && e.key.length === 1 && arrLetters[row][cell].value === '' && wordLength !== 'animaldle') {
 
       addLetter(e.key.toUpperCase())
 
@@ -58,6 +60,34 @@ const useKeyDown = () => {
         changeCell(wordLength - 1)
       }
     }
+
+    if(/[a-zA-ZñÑ]/.test(e.key) && e.key.length === 1 && arrLetters[row][cell].value === '' && wordLength === 'animaldle') {
+      const lettersEmoji = Object.keys(animaldleObj)
+
+      if(lettersEmoji.indexOf(e.key.toLowerCase()) !== -1) {
+        addLetter(animaldleObj[e.key.toLowerCase()])
+
+        const word = arrLetters[row].reduce((acc, cv) => {
+          if(cv.value) {
+            acc.push(cv.value)
+          }
+          return acc
+        }, [])
+  
+        // Avanza de 1 en 1
+        if(cell < 4 && word.length !== 5) {
+          changeCell(cell + 1)
+        }
+        // Si la última letra se ha ingresada, la celda seleccionada cambia a la primera vacía
+        if(arrLetters[row][4].value !== '' && word.length !== 5) {
+          changeCell(arrLetters[row].findIndex(e => e.value === ""))
+        }
+        // Si la fila tiene todos los caracteres, se va a la última casilla
+        if(word.length === 5) {
+          changeCell(4)
+        }
+      }
+    }
   }
 
   // Backspace
@@ -69,9 +99,37 @@ const useKeyDown = () => {
 
   // Enter
   const pressEnter = (e, notificationHTML, styles) => {
-    const word = arrLetters[row]?.reduce((acc, cv) => acc + cv.value.toLowerCase(), '')
-    if(e.key === "Enter" && word.length === wordLength) {
-      if(wordExist(word, wordLength)) {
+    const word = arrLetters[row].reduce((acc, cv) => {
+      if(cv.value) {
+        acc.push(cv.value)
+      }
+      return acc
+    }, [])
+    const wordLengthWithEmoji = wordLength === 'animaldle' ? 5 : wordLength
+    if(e.key === "Enter" && word.length === wordLengthWithEmoji) {
+      if(wordLength !== 'animaldle') {
+        if(wordExist(word, wordLength)) {
+          const arrStatus = compareWord(word.join(''), wordSelected, changeYouWon)
+          for(let i = 0; i < word.length; i++) {
+            setTimeout(() => {
+              changeStatus(arrStatus[i].status, i)
+            }, 200 * i)
+          }
+          let index = opportunitiesAndLetter.findIndex(e => e.letters === wordLength)
+          if(row + 1 < opportunitiesAndLetter[index].opportunities) {
+            changeRow(row + 1)
+          }
+          if(row + 1 === opportunitiesAndLetter[index].opportunities && !arrStatus.every(e => e.status === 'perfect') && arrLetters[row][wordLength - 1] !== '') {
+            changeYouWon(false)
+          }
+        } else {
+          notificationHTML.current.classList.remove(styles.hidden)
+          setTimeout(() => {
+            notificationHTML.current.classList.add(styles.hidden)
+          }, 3000)
+        }
+      }
+      if(wordLength === 'animaldle') {
         const arrStatus = compareWord(word, wordSelected, changeYouWon)
         for(let i = 0; i < word.length; i++) {
           setTimeout(() => {
@@ -85,11 +143,6 @@ const useKeyDown = () => {
         if(row + 1 === opportunitiesAndLetter[index].opportunities && !arrStatus.every(e => e.status === 'perfect') && arrLetters[row][wordLength - 1] !== '') {
           changeYouWon(false)
         }
-      } else {
-        notificationHTML.current.classList.remove(styles.hidden)
-        setTimeout(() => {
-          notificationHTML.current.classList.add(styles.hidden)
-        }, 3000)
       }
     }
   }

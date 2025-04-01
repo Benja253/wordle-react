@@ -30,7 +30,7 @@
 }
 .item {
   display: grid;
-  grid-template-columns: 1fr 6em;
+  grid-template-columns: 1fr 7.5em;
   gap: 1em;
   align-items: center;
 }
@@ -41,11 +41,15 @@
 .select {
   font-size: 0.9em;
   font-weight: 500;
-  width: 7.5em;
+  width: max-content;
   padding: 0.3em 0.5em;
   border-radius: 0.5em;
   background-color: var(--bg-body);
   color: var(--font-color);
+  cursor: pointer;
+  &:hover {
+    filter: brightness(1.2);
+  }
 }
 .toggle {
   --width-toggle: 3em;
@@ -66,7 +70,7 @@
 .dark {
   background-color: var(--perfect-color);
   & .toggle__btn {
-    transform: translateX(93%);
+    transform: translateX(105%);
   }
 }
 .toggle__btn {
@@ -90,6 +94,8 @@
   border-radius: 0.5em;
   background-color: var(--btn-red-color);
   color: var(--keyboard-font-color);
+  text-align: center;
+  cursor: pointer;
   &:hover {
     filter: brightness(1.1)
   }
