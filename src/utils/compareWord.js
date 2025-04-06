@@ -21,6 +21,7 @@ export const compareWord = (word, wordSelected, changeYouWon) => {
   
   wordSelected = typeof wordSelected === 'string' ? wordSelected.split('') : wordSelected
   const letterQuantity = wordSelected.reduce((acc, cv) => {
+    cv
     if(acc.hasOwnProperty(cv)) {
       acc[cv] += 1
     } else {
@@ -34,11 +35,13 @@ export const compareWord = (word, wordSelected, changeYouWon) => {
     const obj = { value: word[i], status: 'no'}
     if(word[i].toLowerCase() === wordSelected[i]) {
       response.push({...obj, status: 'perfect'})
-      letterQuantity[word[i]] -= 1
+      letterQuantity[word[i].toLowerCase()] -= 1
     } else {
       response.push(obj)
     }
   }
+
+  console.log({letterQuantity, response, wordSelected})
 
   // Encontrar coincidencias imperfectas
   for(let i = 0; i < word.length; i++) {

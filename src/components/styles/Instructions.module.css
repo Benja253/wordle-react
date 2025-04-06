@@ -63,8 +63,6 @@
 }
 .item__p {
   font-weight: 300;
-  display: flex;
-  gap: 0.5em;
   align-items: end;
   margin-bottom: 0.4em;
 }
