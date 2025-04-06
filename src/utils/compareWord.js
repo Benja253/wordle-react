@@ -41,8 +41,6 @@ export const compareWord = (word, wordSelected, changeYouWon) => {
     }
   }
 
-  console.log({letterQuantity, response, wordSelected})
-
   // Encontrar coincidencias imperfectas
   for(let i = 0; i < word.length; i++) {
     if(wordSelected.includes(word[i].toLowerCase()) && letterQuantity[word[i].toLowerCase()] !== 0 && response[i].status !== 'perfect') {
