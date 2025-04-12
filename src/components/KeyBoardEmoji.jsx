@@ -34,7 +34,7 @@ const KeyBoardEmoji = () => {
       const arrStatus = compareWord(word, wordSelected, changeYouWon)
       for(let i = 0; i < word.length; i++) {
         setTimeout(() => {
-          changeStatus(arrStatus[i].status, i)
+          changeStatus(arrStatus[i].status, i, row)
         }, 200 * i)
       }
       let index = opportunitiesAndLetter.findIndex(e => e.letters === 4)

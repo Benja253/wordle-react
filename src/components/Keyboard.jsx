@@ -22,13 +22,14 @@ const Keyboard = ({ notificationHTML, stylesApp }) => {
   }
 
   const handleEnter = () => {
+    const row = cellActive.row
     const word = arrLetters[row].reduce((acc, cv) => acc + cv.value.toLowerCase(), '')
     if(word.length === wordLength) {
       if(wordExist(word.split(''), wordLength)) {
         const arrStatus = compareWord(word, wordSelected, changeYouWon)
         for(let i = 0; i < word.length; i++) {
           setTimeout(() => {
-            changeStatus(arrStatus[i].status, i)
+            changeStatus(arrStatus[i].status, i, row)
           }, 200 * i)
         }
         if(row + 1 < opportunitiesAndLetter[opportunitiesAndLetter.findIndex(e => e.letters == wordLength)].opportunities) {

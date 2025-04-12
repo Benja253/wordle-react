@@ -132,9 +132,10 @@ const useKeyDown = () => {
       }
       if(wordLength === 'animaldle') {
         const arrStatus = compareWord(word, wordSelected, changeYouWon)
+        const row = cellActive.row
         for(let i = 0; i < word.length; i++) {
           setTimeout(() => {
-            changeStatus(arrStatus[i].status, i)
+            changeStatus(arrStatus[i].status, i, row)
           }, 200 * i)
         }
         let index = opportunitiesAndLetter.findIndex(e => e.letters === wordLength)
