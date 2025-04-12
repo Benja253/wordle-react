@@ -54,13 +54,13 @@ export const useStore = create((set) => ({
     }
     return {arrLetters: [...state.arrLetters]}
   }),
-  changeStatus: (newStatus, cell) => set(state => {
+  changeStatus: (newStatus, cell, row) => set(state => {
     const wordLengthState = state.wordLength === 'animaldle' ? 5 : state.wordLength
     const index = state.opportunitiesAndLetter.findIndex(e => e.letters === wordLengthState)
     if(state.arrLetters[state.opportunitiesAndLetter[index].opportunities - 2][wordLengthState - 1].status !== 'none') {
-      state.arrLetters[state.cellActive.row][cell].status = newStatus
+      state.arrLetters[row][cell].status = newStatus
     } else {
-      state.arrLetters[state.cellActive.row === 0 ? state.cellActive.row : state.cellActive.row - 1][cell].status = newStatus
+      state.arrLetters[row][cell].status = newStatus
     }
     return {arrLetters: [...state.arrLetters]}
   }),

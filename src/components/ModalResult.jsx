@@ -64,7 +64,7 @@ const ModalResult = ({stylesApp}) => {
         <h2 className={`${styles.title}`}>{youWon ? 'Ganaste 🎉': 'Perdiste 😵'}</h2>
         <section className={styles.selected}>
           <p className={styles.selected__p}>La {wordLength === 'animaldle' ? 'secuencia' : 'palabra'} seleccionada es:</p>
-          <h3 className={`${styles.selected__word} ${styles[youWon]}`}>{wordSelected}</h3>
+          <h3 className={`${styles.selected__word} ${styles[youWon]}`}>{youWon !== null && wordSelected}</h3>
         </section>
         <div className={styles.attempts}>
           {

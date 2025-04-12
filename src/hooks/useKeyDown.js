@@ -109,10 +109,11 @@ const useKeyDown = () => {
     if(e.key === "Enter" && word.length === wordLengthWithEmoji) {
       if(wordLength !== 'animaldle') {
         if(wordExist(word, wordLength)) {
+          const row = cellActive.row
           const arrStatus = compareWord(word.join(''), wordSelected, changeYouWon)
           for(let i = 0; i < word.length; i++) {
             setTimeout(() => {
-              changeStatus(arrStatus[i].status, i)
+              changeStatus(arrStatus[i].status, i, row)
             }, 200 * i)
           }
           let index = opportunitiesAndLetter.findIndex(e => e.letters === wordLength)
